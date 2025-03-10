@@ -1,8 +1,8 @@
 package com.example.addressbook.controller;
 
 import com.example.addressbook.model.vrAd;
-import com.example.addressbook.service.vrAdService; // Import the service interface
-import lombok.RequiredArgsConstructor;
+import com.example.addressbook.service.vrAdService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +10,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/addresses")
-@RequiredArgsConstructor
 public class vrAdController {
 
-    private final vrAdService vrAdSvc; // Corrected service declaration
+    private final vrAdService vrAdSvc;
+
+    @Autowired
+    public vrAdController(vrAdService vrAdSvc) {
+        this.vrAdSvc = vrAdSvc;
+    }
 
     @GetMapping
     public List<vrAd> getAllAddresses() {
